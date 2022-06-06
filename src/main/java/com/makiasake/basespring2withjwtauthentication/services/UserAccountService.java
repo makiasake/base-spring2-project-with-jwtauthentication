@@ -3,10 +3,12 @@ package com.makiasake.basespring2withjwtauthentication.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.makiasake.basespring2withjwtauthentication.domain.UserAccount;
 import com.makiasake.basespring2withjwtauthentication.repositories.UserAccountRepository;
+import com.makiasake.basespring2withjwtauthentication.security.UserSS;
 import com.makiasake.basespring2withjwtauthentication.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -24,4 +26,11 @@ public class UserAccountService {
 		throw new ObjectNotFoundException("Object not found: " + email + ", " + UserAccount.class.getName());
 	}
 	
+	public static UserSS authenticated () {
+		try {
+			return (UserSS) SecurityContextHolder.getContext().getAuthentication().getPrincipal();	
+		} catch (Exception e) {
+			return null;
+		}
+	}	
 }
