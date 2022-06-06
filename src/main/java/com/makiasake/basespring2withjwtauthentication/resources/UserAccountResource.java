@@ -1,0 +1,26 @@
+package com.makiasake.basespring2withjwtauthentication.resources;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.makiasake.basespring2withjwtauthentication.domain.UserAccount;
+import com.makiasake.basespring2withjwtauthentication.dto.UserAccountDTO;
+import com.makiasake.basespring2withjwtauthentication.services.UserAccountService;
+
+@Controller
+@RequestMapping("/users")
+public class UserAccountResource {
+
+	@Autowired
+	private UserAccountService userAccountService;
+
+	@RequestMapping(value = "/email", method = RequestMethod.GET)
+	public ResponseEntity<UserAccountDTO> getUserByEmail(@RequestParam(value = "email") String email) {
+		UserAccount userAccount = this.userAccountService.findUserByEmail(email);
+		return ResponseEntity.ok().body(new UserAccountDTO(userAccount));
+	}
+}

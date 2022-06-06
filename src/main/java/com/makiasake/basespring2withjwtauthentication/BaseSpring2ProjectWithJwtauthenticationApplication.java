@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.makiasake.basespring2withjwtauthentication.domain.UserAccount;
+import com.makiasake.basespring2withjwtauthentication.domain.enums.Profile;
 import com.makiasake.basespring2withjwtauthentication.repositories.UserAccountRepository;
 
 @SpringBootApplication
@@ -26,6 +27,7 @@ public class BaseSpring2ProjectWithJwtauthenticationApplication implements Comma
 	public void run(String... args) throws Exception {
 		
 		UserAccount account = new UserAccount(null, "test@gmail.com", "test", pe.encode("123"));
+		account.addPerfil(Profile.ADMIN);
 		userAccountRepository.save(account);		
 	}
 

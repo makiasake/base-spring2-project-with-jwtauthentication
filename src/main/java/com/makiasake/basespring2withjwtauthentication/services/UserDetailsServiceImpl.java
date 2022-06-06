@@ -1,6 +1,6 @@
 package com.makiasake.basespring2withjwtauthentication.services;
 
-import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,14 +20,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		UserAccount userAccount = userAccountRepository.findByEmail(email);
+		Optional<UserAccount> userAccount = userAccountRepository.findByEmail(email);
 
-		if (Objects.isNull(userAccount)) {
+		if (!userAccount.isPresent()) {
 			throw new UsernameNotFoundException(email);
 		}
 
-		return new UserSS(userAccount.getId(), userAccount.getEmail(), userAccount.getPassword(),
-				userAccount.getProfiles());
+		return new UserSS(userAccount.get().getId(), userAccount.get().getEmail(), userAccount.get().getPassword(),
+				userAccount.get().getProfiles());
 	}
 
 }
