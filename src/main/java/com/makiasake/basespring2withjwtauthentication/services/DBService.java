@@ -20,10 +20,10 @@ public class DBService {
 	private BCryptPasswordEncoder pe;
 
 	public void instantiateTestDatabase() {
-		UserAccount account = new UserAccount(null, "admin@gmail.com", "test", pe.encode("123"));
+		UserAccount account = new UserAccount(null, "admin@gmail.com", "admin", pe.encode("123"));
 		account.addPerfil(Profile.ADMIN);
 		
-		UserAccount account1 = new UserAccount(null, "user@gmail.com", "test", pe.encode("123"));
+		UserAccount account1 = new UserAccount(null, "user@gmail.com", "user", pe.encode("123"));
 		account1.addPerfil(Profile.USER);
 		
 		userAccountRepository.saveAll(Arrays.asList(account, account1));
