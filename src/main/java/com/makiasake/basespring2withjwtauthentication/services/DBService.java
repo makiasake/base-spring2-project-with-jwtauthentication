@@ -26,6 +26,9 @@ public class DBService {
 		UserAccount account1 = new UserAccount(null, "user@gmail.com", "user", pe.encode("123"));
 		account1.addPerfil(Profile.USER);
 		
-		userAccountRepository.saveAll(Arrays.asList(account, account1));
+		UserAccount account2 = new UserAccount(null, "test@gmail.com", "test", pe.encode("123"));
+		account2.addPerfil(Profile.USER);
+		
+		userAccountRepository.saveAll(Arrays.asList(account, account1, account2));
 	}
 }

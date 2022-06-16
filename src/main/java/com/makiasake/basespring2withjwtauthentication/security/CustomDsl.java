@@ -20,7 +20,7 @@ public class CustomDsl extends AbstractHttpConfigurer<CustomDsl, HttpSecurity> {
 	public void configure(HttpSecurity http) throws Exception {
 		AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
 		http.addFilterBefore(new JWTAuthenticationFilter(authenticationManager, jwtUtil), UsernamePasswordAuthenticationFilter.class);
-		http.addFilter(new JWTAuthorizationFilter(authenticationManager, jwtUtil, userDetailsService));
+		http.addFilterBefore(new JWTAuthorizationFilter(authenticationManager, jwtUtil, userDetailsService), UsernamePasswordAuthenticationFilter.class);
 	}
 
 	public static CustomDsl customDsl(JWTUtil jwtUtil, UserDetailsService userDetailsService) {

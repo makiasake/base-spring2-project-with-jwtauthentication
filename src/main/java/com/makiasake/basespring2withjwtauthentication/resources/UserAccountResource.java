@@ -2,6 +2,8 @@ package com.makiasake.basespring2withjwtauthentication.resources;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,5 +24,13 @@ public class UserAccountResource {
 	public ResponseEntity<UserAccountDTO> getUserByEmail(@RequestParam(value = "email") String email) {
 		UserAccount userAccount = this.userAccountService.findUserByEmail(email);
 		return ResponseEntity.ok().body(new UserAccountDTO(userAccount));
+	}
+	
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> update(@PathVariable Integer id) {
+		userAccountService.delete(id);
+
+		return ResponseEntity.noContent().build();
 	}
 }
