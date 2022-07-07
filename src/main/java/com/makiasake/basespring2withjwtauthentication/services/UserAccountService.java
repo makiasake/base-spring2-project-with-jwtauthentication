@@ -26,12 +26,12 @@ public class UserAccountService {
 		throw new ObjectNotFoundException("Object not found: " + email + ", " + UserAccount.class.getName());
 	}
 
-	public void delete(Integer id) {
+	public void delete(String id) {
 		findUserById(id);
 		repository.deleteById(id);
 	}
 
-	public UserAccount findUserById(Integer id) {
+	public UserAccount findUserById(String id) {
 		Optional<UserAccount> userAccount = this.repository.findById(id);
 
 		if (userAccount.isPresent())

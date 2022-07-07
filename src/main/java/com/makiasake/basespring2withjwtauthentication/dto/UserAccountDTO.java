@@ -7,13 +7,13 @@ import com.makiasake.basespring2withjwtauthentication.domain.UserAccount;
 public class UserAccountDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private Integer id;
+	private String id;
 	private String name;
 	private String email;
 	
 	public UserAccountDTO() {}
 
-	public UserAccountDTO(Integer id, String name, String email) {
+	public UserAccountDTO(String id, String name, String email) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
@@ -25,11 +25,11 @@ public class UserAccountDTO implements Serializable {
 		this.email = userAccount.getEmail();
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

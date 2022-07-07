@@ -25,12 +25,11 @@ public class UserAccountResource {
 		UserAccount userAccount = this.userAccountService.findUserByEmail(email);
 		return ResponseEntity.ok().body(new UserAccountDTO(userAccount));
 	}
-	
+
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> update(@PathVariable Integer id) {
+	public ResponseEntity<Void> delete(@PathVariable String id) {
 		userAccountService.delete(id);
-
 		return ResponseEntity.noContent().build();
 	}
 }

@@ -13,14 +13,14 @@ import com.makiasake.basespring2withjwtauthentication.domain.enums.Profile;
 public class UserSS implements UserDetails {
 	private static final long serialVersionUID = 1L;
 	
-	private Integer id;
+	private String id;
 	private String email;
 	private String password;
 	private Collection<? extends GrantedAuthority> authorities;
 	
 	public UserSS() {}
 	
-	public UserSS(Integer id, String email, String password, Set<Profile> profiles) {
+	public UserSS(String id, String email, String password, Set<Profile> profiles) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -28,7 +28,7 @@ public class UserSS implements UserDetails {
 		this.authorities = profiles.stream().map(x -> new SimpleGrantedAuthority(x.getDescription())).collect(Collectors.toList());
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 

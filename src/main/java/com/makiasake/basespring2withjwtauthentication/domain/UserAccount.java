@@ -6,20 +6,18 @@ import java.util.stream.Collectors;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.makiasake.basespring2withjwtauthentication.domain.enums.Profile;
 
-@Entity
+@Document(collection = "user_account")
 public class UserAccount {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private String id;
 	private String email;
 	private String name;
 	private String password;
@@ -31,18 +29,18 @@ public class UserAccount {
 	public UserAccount() {
 	}
 
-	public UserAccount(Integer id, String email, String name, String password) {
+	public UserAccount(String id, String email, String name, String password) {
 		this.id = id;
 		this.email = email;
 		this.name = name;
 		this.password = password;
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
