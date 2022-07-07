@@ -20,6 +20,7 @@ public class UserAccountResource {
 	@Autowired
 	private UserAccountService userAccountService;
 
+	@PreAuthorize("#email == authentication.principal.username || hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/email", method = RequestMethod.GET)
 	public ResponseEntity<UserAccountDTO> getUserByEmail(@RequestParam(value = "email") String email) {
 		UserAccount userAccount = this.userAccountService.findUserByEmail(email);
